@@ -1,0 +1,33 @@
+body{
+  font-family:'Merriweather', serif;
+}
+
+.loginButton, .signUpButton{
+  padding:5px 10px;
+  border-radius: 50%
+  background-color:#65c0ba;
+}
+
+form{
+  background-color: lightgrey;
+  padding:15px;
+  margin: 15px auto;
+}
+
+nav{
+  background-color: #F76262;
+}
+
+body{
+  background-color: #65C0BA;
+}
+
+#header{
+  font-size: 60px;
+  color: #216583;
+}
+
+#header + p{
+  font-size: 25px;
+  color: #216583;
+}
