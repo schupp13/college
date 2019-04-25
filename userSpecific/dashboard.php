@@ -54,8 +54,10 @@
     <header>
       <div class="jumbotron jumbotron-fluid" id="indexHeader">
       <div class="container text-center">
-        <h1  id="dashHeader">Welcome "{$_SESSION['firstName']}" "{$_SESSION['lastName']}"</h1>
-        <p id="dashP">Home of the Knights</p>
+        <?
+        echo '<h1 id=dashHeader> Welcome'.$_SESSION['firstname']. '!</h1>';
+        echo '<p id="dashP">Home of the Knights</p>';
+        ?>
       </div>
     </div>
     </header>

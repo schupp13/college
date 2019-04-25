@@ -53,6 +53,13 @@
   <div class="container text-center">
     <h1  id="header">Become a Pseudo College student</h1>
     <p>Register Now</p>
+    <?
+    if(isset($_SESSION['alreadyUser'])) {
+      echo $_SESSION['alreadyUser'];
+      $_SESSION['alreadyUser'] = '';
+    }
+    ?>
+
   </div>
 </div>
 </header>
