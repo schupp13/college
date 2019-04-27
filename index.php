@@ -60,7 +60,7 @@
     </div>
     </header>
       <div>
-        <? include 'navPages/loginModal.php'; ?>
+        <? include 'process/loginModal.php'; ?>
       </div>
 
 

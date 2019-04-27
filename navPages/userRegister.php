@@ -1,3 +1,4 @@
+<?session_start();?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -58,8 +59,12 @@
       echo $_SESSION['alreadyUser'];
       $_SESSION['alreadyUser'] = '';
     }
-    ?>
+    if(isset($_SESSION["noUser"])) {
+      echo $_SESSION["noUser"];
+      $_SESSION["noUser"] = '';
+    }
 
+    ?>
   </div>
 </div>
 </header>

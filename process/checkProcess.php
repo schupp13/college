@@ -1,5 +1,4 @@
 <?
-
 function checkStudents ($emailCheck) {
   include 'config.php';
   // Create connection
@@ -19,11 +18,9 @@ function checkStudents ($emailCheck) {
         $test=false;
       }
   }
-
   }
   mysqli_close($conn);
 
   return $test;
 }
-
 ?>

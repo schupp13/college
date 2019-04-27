@@ -1,5 +1,6 @@
-<?PHP session_start();?>
+<?php session_start();?>
 <?
+
 include 'config.php';
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
@@ -25,25 +26,20 @@ require_once "checkProcess.php";
 $check = checkStudents($email);
 // if the the function returns true then the studnet is not in the system already
 if($check){
-  $sqlInsert = "INSERT INTO students (studentFirstName, studentLastName, studentEmail, studentPhone, studentGender, studentTextArea, studentAddress, studentAddress2, studentCity, studentState, studentPostCode, studentPassword)
+  $sql= "INSERT INTO students (studentFirstName, studentLastName, studentEmail, studentPhone, studentGender, studentTextArea, studentAddress, studentAddress2, studentCity, studentState, studentPostCode, studentPassword)
    VALUES('{$firstName}','{$lastName}','{$email}','{$phone}','{$gender}','{$notes}','{$streetAddress}','{$streetAddress2}','{$city}','{$state}','{$postCode}','{$password}')";
 
-  if (mysqli_query($conn, $sqlInsert)) {
-      header('Location: http://hello.schupp.webfactional.com/college/userSpecific/dashboard.php');
-      require_once "loginProcess.php";// creating a session
-      loginProcess($email,$username);
-      //Creating Session variables
-    //sending user to dashboard
+  if (mysqli_query($conn, $sql)) {
+    require_once "loginProcess.php";
+    loginSession($email,$password);
+
   } else {
-      echo "Error: " . $sqlInsert . "<br>" . mysqli_error($conn);
+      echo "Error: " . $sql . "<br>" . mysqli_error($conn);
   }
 }else{
     $_SESSION['alreadyUser'] = "<h1 style='color:red'>That email is already a memeber in the account.</h1> ";
     header('Location: http://hello.schupp.webfactional.com/college/navPages/userRegister.php');
 
 }
-
 mysqli_close($conn);
-
-
 ?>

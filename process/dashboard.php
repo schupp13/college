@@ -1,3 +1,5 @@
+<?php session_start();?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -15,13 +17,10 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="../css/main.css">
     <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
   </head>
   <body>
-
-
     <nav class="navbar navbar-expand-sm  navbar-light">
   <ul class="navbar-nav nav-justified w-100">
     <li class="nav-item active">
@@ -46,7 +45,7 @@
       <a class="nav-link btn btn-info" href="navPages/userRegister.php">Sign Up</a>
     </li>
     <li class="nav-item loginButton">
-      <a class="nav-link btn btn-info" data-toggle="modal" data-target="#myModal">Login</a>
+      <a class="nav-link btn btn-info">Sign Out</a>
     </li>
 
   </ul>
@@ -55,16 +54,31 @@
       <div class="jumbotron jumbotron-fluid" id="indexHeader">
       <div class="container text-center">
         <?
-        echo '<h1 id=dashHeader> Welcome'.$_SESSION['firstname']. '!</h1>';
+        echo '<h1 id=dashHeader> Welcome '.$_SESSION["firstName"].'!</h1>';
         echo '<p id="dashP">Home of the Knights</p>';
         ?>
       </div>
     </div>
     </header>
-      <div>
-        <? include 'navPages/loginModal.php'; ?>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="card" style="width:400px">
+        <img class="card-img-top" src="../img/img_avatar1.png" alt="Card image">
+        <div class="card-body">
+          <h4 class="card-title"><?=$_SESSION["firstName"]?></h4>
+          <h4 class="card-title"><?=$_SESSION["lastName"]?></h4>
+          <p class="card-text">Some example text.</p>
+          <a href="#" class="btn btn-primary">Edit Profile</a>
+        </div>
       </div>
+    </div>
+    <div class="col-lg-6">
+      <a href="registerCourses.php" class="btn btn-info">Register For Courses</a>
+    </div>
+  </div>
+</div>
 
-
+      
   </body>
 </html>
