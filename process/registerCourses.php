@@ -22,40 +22,38 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-sm  navbar-light">
-  <ul class="navbar-nav nav-justified w-100">
-    <li class="nav-item active">
-      <a class="nav-link" href="#">Home</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Academics</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Admissions</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Student Life</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Research</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Athletics</a>
-    </li>
-    <li class="nav-item signUpButton">
-      <a class="nav-link btn btn-info" href="navPages/userRegister.php">Sign Up</a>
-    </li>
-    <li class="nav-item loginButton">
-      <a class="nav-link btn btn-info">Sign Out</a>
-    </li>
-
-  </ul>
-</nav>
+      <ul class="navbar-nav nav-justified w-100">
+        <li class="nav-item active">
+          <a class="nav-link" href="../index.php">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Academics</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Admissions</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Student Life</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Research</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Athletics</a>
+        </li>
+        <li class="nav-item signUpButton">
+          <a class="nav-link btn btn-info active" href=>Sign Up</a>
+        </li>
+        <li class="nav-item loginButton">
+            <a href="signOutProcess.php"class="nav-link btn btn-info">Sign Out</a>
+        </li>
+      </ul>
+    </nav>
     <header>
       <div class="jumbotron jumbotron-fluid" id="indexHeader">
       <div class="container text-center">
-        <?
+        <?php
         echo '<h1 id=courseJumbo> Welcome '.$_SESSION["firstName"].'!</h1>';
-
         ?>
         <p id="coursep">Let's register for your courses!</p>
       </div>
@@ -66,8 +64,7 @@
         <div class="row">
           <div class="col-md-12">
             <h4>Choose from the list of classes below.</h4>
-            <h4>Select the check box in the far right to add it to the Register list.</h4>
-            <?
+            <?php
             include 'config.php';
             // Create connection
               $conn = mysqli_connect($servername, $username, $password, $dbname);
@@ -79,9 +76,9 @@
               $result = mysqli_query($conn, $sql);
 
               if (mysqli_num_rows($result) > 0) {
-                  // output data of each row
-                  ?>
+                  // output data of each row?>
                   <div class="table-responsive align-items-center">
+                    <form class="form-group"action="courseProcess.php" method="post" style="background-color:transparent; padding:0; margin:0">
                     <table class="table table-striped">
                     <tr class="text-center">
                       <th>Course Number</th>
@@ -93,34 +90,32 @@
                       <th>Credits</th>
                       <th>Register</th>
                     </tr>
-
-
-                  <?
-                  while($row = mysqli_fetch_assoc($result)) {
-                    echo "<tr>";
+                  <?php
+                  while ($row = mysqli_fetch_assoc($result)) {
+                    require_once "checkProcess.php";
+                    $check = checkCourses($_SESSION["id"], $row["id"]);
+                    if ($check) {
+                      // code...
+                      echo "<tr>";
                       echo'<td>'.$row["courseNumber"].'</td>';
                       echo'<td>'.$row["courseName"].'</td>';
                       echo'<td width="10%">'.$row["instructor"].'</td>';
                       echo'<td width="15%">'.$row["days"].'</td>';
                       echo'<td>'.$row["description"].'</td>';
-                      echo'<td>'.$row["price"].'</td>';
+                      echo'<td>'.$row["cost"].'</td>';
                       echo'<td>'.$row["credits"].'</td>';
                       echo '<td>
-                      <form class="form-group"action="courseProcess.php" method="post" style="background-color:transparent; padding:0; margin:0">
                       <div class="form-group">
-                        <input style="background-color:"#65C0BA" class="form-control" type="checkbox" name="class[]" value="'.$row['id'].'">
-
-
+                        <input style="background-color:"#65C0BA" margin:"25px" width="50%"class="form-control" type="checkbox" name="class[]" value="'.$row['id'].'">
+                        </div>
                       </td>';
-                    echo "</tr>";
-
+                      echo "</tr>";
                   }
-                  ?>
-                  <button type="submit" name="button">Register Courses</button>
-                  </div>
-                </form>
+                } ?>
                   </table>
-                </div><?
+                  <button type="submit" name="button" class="btn btn-info btn-lg">Register Courses</button>
+                  </form>
+                </div><?php
               } else {
                   echo "0 results";
               }

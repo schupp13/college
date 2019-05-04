@@ -1,5 +1,4 @@
 <?php session_start();?>
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -18,67 +17,89 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/dash.css">
     <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+
   </head>
   <body>
-    <nav class="navbar navbar-expand-sm  navbar-light">
-  <ul class="navbar-nav nav-justified w-100">
-    <li class="nav-item active">
-      <a class="nav-link" href="#">Home</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Academics</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Admissions</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Student Life</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Research</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Athletics</a>
-    </li>
-    <li class="nav-item signUpButton">
-      <a class="nav-link btn btn-info" href="navPages/userRegister.php">Sign Up</a>
-    </li>
-    <li class="nav-item loginButton">
-      <a class="nav-link btn btn-info">Sign Out</a>
-    </li>
-
-  </ul>
-</nav>
     <header>
-      <div class="jumbotron jumbotron-fluid" id="indexHeader">
+      <div class="jumbotron jumbotron-fluid " id="indexHeader">
       <div class="container text-center">
         <?
-        echo '<h1 id=dashHeader> Welcome '.$_SESSION["firstName"].'!</h1>';
-        echo '<p id="dashP">Home of the Knights</p>';
+        echo '<h1 id="dashHeader">'.$_SESSION["firstName"]. " ".$_SESSION["lastName"].'</h1>';
+        echo '<h2>Student Dashboard</h2>';
+
+        echo '<img src="../img/horse.png" alt="" style="width:20%;">';
+        echo '<h4 id="dashP">Home of the Knights</h4>';
         ?>
       </div>
     </div>
-    </header>
-<div class="container">
-  <div class="row">
-    <div class="col-lg-6">
-      <div class="card" style="width:400px">
-        <img class="card-img-top" src="../img/img_avatar1.png" alt="Card image">
-        <div class="card-body">
-          <h4 class="card-title"><?=$_SESSION["firstName"]?></h4>
-          <h4 class="card-title"><?=$_SESSION["lastName"]?></h4>
-          <p class="card-text">Some example text.</p>
-          <a href="#" class="btn btn-primary">Edit Profile</a>
+  </header>
+<div class="container mt-3">
+  <h2><?=$_SESSION["firstName"]."'s "?>Dashboard</h2>
+  <br>
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs nav-justified">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#profile">Your Profile</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#registeredCourses">Registered Courses</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#displayCourses">Eligiable Courses</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#displayCourses">Pay For Courses</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link"  href="signOutProcess.php">Sign Out</a>
+    </li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div id="profile" class="container tab-pane active"><br>
+      <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <h3>Your Profile</h3>
+              <? include 'displayProfile.php'?>
+          </div>
+          </div>
+        </div>
+    </div>
+    <div id="registeredCourses" class="container tab-pane fade"><br>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <h3>Your Courses</h3>
+            <? include 'displayRegCourse.php'?>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-lg-6">
-      <a href="registerCourses.php" class="btn btn-info">Register For Courses</a>
+    <div id="displayCourses" class="container tab-pane fade"><br>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <h3>Eligiable Courses</h3>
+            <? include 'displayCourses.php'?>
+          </div>
+        </div>
+        </div>
+    </div>
+    <div id="menu3" class="container tab-pane fade"><br>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <h3>Eligiable Courses</h3>
+            <? include 'displayCourses.php'?>
+          </div>
+        </div>
+        </div>
     </div>
   </div>
 </div>
-
-      
-  </body>
+</body>
 </html>

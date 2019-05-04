@@ -1,4 +1,6 @@
+<?php session_start();?>
 <?php
+
 $target_dir = "uploads/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
@@ -7,8 +9,26 @@ $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 if(isset($_POST["submit"])) {
     $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
     if($check !== false) {
-        echo "File is an image - " . $check["mime"] . ".";
         $uploadOk = 1;
+        //adding the path to the image to the DB
+        include 'config.php';
+
+        // Create connection
+        $conn = mysqli_connect($servername, $username, $password, $dbname);
+        // Check connection
+        if (!$conn) {
+            die("Connection failed: " . mysqli_connect_error());
+        }
+        $sql = "UPDATE students SET studentImage='{$target_file}' WHERE id='{$_SESSION["id"]}'";
+        $_SESSION["image"] = $target_file;
+        if (mysqli_query($conn, $sql)) {
+          header('Location: http://hello.schupp.webfactional.com/college/process/dashboard.php');
+            echo "Record updated successfully";
+        } else {
+            echo "Error updating record: " . mysqli_error($conn);
+
+        }
+        mysqli_close($conn);
     } else {
         echo "File is not an image.";
         $uploadOk = 0;
@@ -20,7 +40,7 @@ if (file_exists($target_file)) {
     $uploadOk = 0;
 }
 // Check file size
-if ($_FILES["fileToUpload"]["size"] > 500000) {
+if ($_FILES["fileToUpload"]["size"] > 50000000) {
     echo "Sorry, your file is too large.";
     $uploadOk = 0;
 }
@@ -41,4 +61,6 @@ if ($uploadOk == 0) {
         echo "Sorry, there was an error uploading your file.";
     }
 }
+
+
 ?>

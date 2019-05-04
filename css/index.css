@@ -1,19 +1,19 @@
-.jumbotron{
-  background:url('../img/students.jpg');
+.jumbotron {
+  background: url('../img/students.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: top;
   min-height: 85vh;
-
 }
 
-#indexHeader, #indexP{
-  color:white;
+#indexHeader, #indexP {
+  color: white;
 }
 
-#indexHeader{
+#indexHeader {
   font-size: 80px;
 }
-#indexP{
+
+#indexP {
   font-size: 25px;
 }
